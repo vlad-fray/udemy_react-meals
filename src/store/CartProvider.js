@@ -51,6 +51,12 @@ const cartReducer = (state, action) => {
 			items,
 		};
 	}
+	if (action.type === 'MAKE-ORDER') {
+		return {
+			items: [],
+			totalAmount: 0,
+		};
+	}
 	return state;
 };
 
@@ -66,12 +72,16 @@ const CartProvider = (props) => {
 	const removeItemFromCartHandler = (id) => {
 		dispatchCartAction({ type: 'REMOVE-ITEM', id: id });
 	};
+	const makeOrderHandler = () => {
+		dispatchCartAction({ type: 'MAKE-ORDER' });
+	};
 
 	const cartContext = {
 		items: cartState.items,
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemFromCartHandler,
+		makeOrder: makeOrderHandler,
 	};
 
 	return (
