@@ -51,11 +51,8 @@ const cartReducer = (state, action) => {
 			items,
 		};
 	}
-	if (action.type === 'MAKE-ORDER') {
-		return {
-			items: [],
-			totalAmount: 0,
-		};
+	if (action.type === 'MADE-ORDER') {
+		return defaultCartState;
 	}
 	return state;
 };
@@ -72,8 +69,8 @@ const CartProvider = (props) => {
 	const removeItemFromCartHandler = (id) => {
 		dispatchCartAction({ type: 'REMOVE-ITEM', id: id });
 	};
-	const makeOrderHandler = () => {
-		dispatchCartAction({ type: 'MAKE-ORDER' });
+	const madeOrderHandler = () => {
+		dispatchCartAction({ type: 'MADE-ORDER' });
 	};
 
 	const cartContext = {
@@ -81,7 +78,7 @@ const CartProvider = (props) => {
 		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemFromCartHandler,
-		makeOrder: makeOrderHandler,
+		madeOrder: madeOrderHandler,
 	};
 
 	return (
